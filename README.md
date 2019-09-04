@@ -43,3 +43,31 @@ Customer want to recreate **aws_cloudwatch_log_group** once destroyed (after app
 
 
 Current terraform behaviour do not delete **Cloudwatch log group**  in AWS, after destroying of **aws_cloudwatch_log_group** with terraform.
+
+## What I have tried to do?
+- By default, **AmazonEKSServicePolicy** attached to eks_role has following permissions:
+```
+{
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "*"
+},
+```
+So... I have tried to attach another policy (the same like this), but with more permissions:
+```
+{
+            "Effect": "Allow",
+            "Action": "logs:*",
+            "Resource": "*"
+},
+```
+**RESULT** -> not working! Because EKS needs exactly this-> AmazonEKSServicePolicy policy.
+
+- So I have tried to attach the above policy + default 2 policies (AmazonEKSClusterPolicy and AmazonEKSServicePolicy ) 
+**RESULT** -> not working!
+
+- I decided that policy is not the problem in this case. Because Terraform use (MAYBE?) some kind of policy during creation of the resources (This part in not very clear to me)
+
+
+
+
