@@ -37,3 +37,9 @@ Error: Creating CloudWatch Log Group failed: ResourceAlreadyExistsException: The
   59: resource "aws_cloudwatch_log_group" "example" {
 
 ```
+## What Customer want to do?
+
+Customer want to recreate **aws_cloudwatch_log_group** once destroyed (after applied enabled_cluster_log_types = [], then applied with enabled_cluster_log_types = ["api", "audit"] )
+
+
+Current terraform behaviour do not delete **Cloudwatch log group**  in AWS, after destroying of **aws_cloudwatch_log_group** with terraform.
